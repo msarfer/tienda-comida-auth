@@ -31,6 +31,7 @@ export const Navbar = () => {
           <li>
             <Link to="/orders">Pedidos</Link>
           </li>
+          { user && <li><Link to="/dashboard">Dashboard</Link></li>}
           {!user && <li><Link to="/login">Login</Link></li>}
           {!user && <li><Link to="/register">Registro</Link></li>}
           {user && <li><button onClick={handleLogout}>Logout</button></li>}
