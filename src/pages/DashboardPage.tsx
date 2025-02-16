@@ -35,9 +35,11 @@ export default function DashboardPage() {
               <tr key={id}>
                 <th scope="row">{email}</th>
                 <td>
-                  {activeRoles?.map(([rol]) => (
-                    <span key={`${id}-${rol}`}>{rol}</span>
-                  ))}
+                  <div style={{display: 'flex', gap: '1rem'}}>
+                    {activeRoles?.map(([rol]) => (
+                      <kbd style={{backgroundColor: '#017FC0', textTransform: 'capitalize'}} key={`${id}-${rol}`}>{rol.toLocaleLowerCase()}</kbd>
+                    ))}
+                  </div>
                 </td>
                 <td>
                   <RolSelector user={user} initActiveRoles={activeRoles}/>

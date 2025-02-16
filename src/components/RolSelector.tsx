@@ -30,7 +30,7 @@ export const RolSelector = ({ user, initActiveRoles }) => {
   };
 
   return (
-    <div style={{display: 'flex', gap: '1rem'}}>
+    <fieldset role="group">
       <details className="dropdown">
         <summary>{`Selecciona los roles...`}</summary>
         <ul>
@@ -49,7 +49,7 @@ export const RolSelector = ({ user, initActiveRoles }) => {
           ))}
         </ul>
       </details>
-      <button style={{ height: 'fit-content',  display: 'inline'}} onClick={handleButton}>Cambiar Roles</button>
-    </div>
+      <button onClick={handleButton}>Cambiar Roles</button>
+    </fieldset>
   );
 };
