@@ -9,8 +9,9 @@ interface AdminRouteProps {
 
 const AdminRoute: React.FC<AdminRouteProps> = ({children}) => {
   const { user, roles } = useContext(AuthContext)
-  console.log(user?.email, roles?.length)
-  if (!user || !roles || !roles.includes(Rol.ADMIN)) {
+  
+  if (!user) return <Navigate to="/login"/>
+  if (!roles || !roles.includes(Rol.ADMIN)) {
     return <Navigate to="/" replace />;
   }
 
