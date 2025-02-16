@@ -3,6 +3,7 @@ import { onValue, ref, off } from "firebase/database";
 import { db } from "../../services/firebase";
 
 interface UserInterface {
+  id: string
   email: string;
   roles: Record<string, boolean>[];
 }
@@ -15,6 +16,8 @@ const initialState: UserState = {
   users: []
 }
 
+const formatRoles = (data) =>  Object.entries(data).map(([id, {email, roles}]) => ({id, email, roles}))
+
 export const fetchUsers = createAsyncThunk("menu/fetchItems", async (_, { rejectWithValue }) => {
   return new Promise<UserInterface[]>((resolve, reject) => {
     const itemsRef = ref(db, "users");
@@ -24,8 +27,8 @@ export const fetchUsers = createAsyncThunk("menu/fetchItems", async (_, { reject
       (snapshot) => {
         const data = snapshot.val();
         if (data) {
-          //const formattedData = formatMenuItems(data);
-          resolve(Object.values(data));
+          const users = formatRoles(data);
+          resolve(users);
         } else {
           reject(new Error("No hay datos disponibles"));
         }

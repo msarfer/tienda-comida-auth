@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, StoreState } from "../store/store";
+import { RolSelector } from "../components/RolSelector";
 import { fetchUsers } from "../features/users/usersSlice";
+import { AppDispatch, StoreState } from "../store/store";
 
 export default function DashboardPage() {
   const { users } = useSelector((state: StoreState) => state.users);
@@ -12,7 +13,6 @@ export default function DashboardPage() {
     dispatch(fetchUsers());
   }, []);
 
-  console.log(users)
   return (
     <div>
       <h2>Dashboard</h2>
@@ -22,15 +22,29 @@ export default function DashboardPage() {
           <tr>
             <th scope="col">Email</th>
             <th scope="col">Roles</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {users?.map((user) => (
-            <tr>
-              <th scope="row">{user.email}</th>
-              <td>{user.roles?.length}</td>
-            </tr>
-          ))}
+          {users?.map((user) => {
+            const { id, email, roles } = user;
+            const activeRoles = roles
+              ? Object.entries(roles)?.filter(([key, value]) => value)
+              : [];
+            return (
+              <tr key={id}>
+                <th scope="row">{email}</th>
+                <td>
+                  {activeRoles?.map(([rol]) => (
+                    <span key={`${id}-${rol}`}>{rol}</span>
+                  ))}
+                </td>
+                <td>
+                  <RolSelector user={user} initActiveRoles={activeRoles}/>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

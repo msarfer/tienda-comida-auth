@@ -43,3 +43,9 @@ export const formatMenuItems = (data) => {
       }))
     : [];
 };
+
+export const updateRoles = async (id, roles) => {
+  const rolesRef = ref(db,  `users/${id}/roles`)
+  console.log(id, roles)
+  await update(rolesRef, roles)
+}
