@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RolSelector } from "../components/RolSelector";
-import { StoreState } from "../store/store";
+import { AppDispatch, StoreState } from "../store/store";
 import { useEffect } from "react";
 import { fetchUsers } from "../features/users/usersSlice";
 

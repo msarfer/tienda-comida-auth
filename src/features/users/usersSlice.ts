@@ -16,7 +16,12 @@ const initialState: UserState = {
   users: []
 }
 
-const formatRoles = (data) =>  Object.entries(data).map(([id, {email, roles}]) => ({id, email, roles}))
+interface UserInfo {
+  email: string;
+  roles: Record<string, boolean>[];
+}
+
+const formatRoles = (data: Record<string,UserInfo>) =>  Object.entries(data).map(([id, {email, roles}]) => ({id, email, roles}))
 
 export const fetchUsers = createAsyncThunk("users/fetchUsers", async (_, { rejectWithValue }) => {
   return new Promise<UserInterface[]>((resolve, reject) => {
@@ -26,6 +31,7 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async (_, { rejec
       itemsRef,
       (snapshot) => {
         const data = snapshot.val();
+        console.log(data)
         if (data) {
           const users = formatRoles(data);
           resolve(users);
