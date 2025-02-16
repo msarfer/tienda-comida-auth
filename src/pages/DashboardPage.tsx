@@ -1,9 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RolSelector } from "../components/RolSelector";
 import { StoreState } from "../store/store";
+import { useEffect } from "react";
+import { fetchUsers } from "../features/users/usersSlice";
 
 export default function DashboardPage() {
   const { users } = useSelector((state: StoreState) => state.users);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
   return (
     <div>
       <h2>Dashboard</h2>
@@ -20,7 +28,7 @@ export default function DashboardPage() {
           {users?.map((user) => {
             const { id, email, roles } = user;
             const activeRoles = roles
-              ? Object.entries(roles)?.filter(([key, value]) => value)
+              ? Object.entries(roles)?.filter(([_, value]) => value)
               : [];
             return (
               <tr key={id}>
