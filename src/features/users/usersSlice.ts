@@ -18,7 +18,7 @@ const initialState: UserState = {
 
 const formatRoles = (data) =>  Object.entries(data).map(([id, {email, roles}]) => ({id, email, roles}))
 
-export const fetchUsers = createAsyncThunk("menu/fetchItems", async (_, { rejectWithValue }) => {
+export const fetchUsers = createAsyncThunk("users/fetchUsers", async (_, { rejectWithValue }) => {
   return new Promise<UserInterface[]>((resolve, reject) => {
     const itemsRef = ref(db, "users");
 

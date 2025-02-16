@@ -1,18 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RolSelector } from "../components/RolSelector";
-import { fetchUsers } from "../features/users/usersSlice";
-import { AppDispatch, StoreState } from "../store/store";
+import { StoreState } from "../store/store";
 
 export default function DashboardPage() {
   const { users } = useSelector((state: StoreState) => state.users);
-
-  const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
-
   return (
     <div>
       <h2>Dashboard</h2>

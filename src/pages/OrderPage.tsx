@@ -1,6 +1,6 @@
+import React, { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { StoreState } from "../store/store";
-import React, { Suspense } from "react";
 
 const Foods = React.lazy(() => import("../components/Foods.tsx"));
 
