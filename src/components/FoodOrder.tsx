@@ -5,6 +5,7 @@ import { refreshMenu } from "../features/menu/menuSlice";
 import { togglePages } from "../features/pages/pagesSlice";
 import { addOrder, lessItems } from "../services/firebase";
 import { AppDispatch } from "../store/store";
+import { useNavigate } from "react-router-dom";
 
 interface FoodOrderProps {
   food: MenuItem;
@@ -17,13 +18,13 @@ function FoodOrder({ food }: FoodOrderProps) {
   const [isSend, setIsSend] = useState<boolean>(false);
   const [isSending, setIsSending] = useState<boolean>(false);
 
-  
+  const navigate = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
 
   const totalPrice = useMemo(() => quantity * food.price, [quantity]);
 
   const handleOrdered = async () => {
-    if (!name || !phone || !quantity) return
+    if (!name || !phone || !quantity || quantity <= 0) return
     const order: Order = {
       name,
       phone,
@@ -69,6 +70,7 @@ function FoodOrder({ food }: FoodOrderProps) {
           id="quantity"
           value={quantity}
           onChange={(evt) => setQuantity(Number(evt.target.value))}
+          min={0}
         />
       </header>
       <input
@@ -85,8 +87,8 @@ function FoodOrder({ food }: FoodOrderProps) {
       />
       <section role="group">
         <button onClick={handleOrdered}>Enviar producto</button>
-        <button onClick={() => dispatch(togglePages())}>
-          Volver al menú
+        <button onClick={() => navigate('/')}>
+          Volver al home
         </button>
       </section>
       {isSend && (
