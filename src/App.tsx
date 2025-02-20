@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { fetchItems } from "./features/menu/menuSlice";
@@ -23,7 +23,7 @@ function App() {
   }, [])
   
   return (
-      <BrowserRouter basename='/tienda-comida-auth'>
+      <HashRouter>
         <Navbar/>
         <Routes>
           <Route path="/" element={<h1>Home</h1>}/>
@@ -34,7 +34,7 @@ function App() {
           <Route path="/orders" element={<ProtectedRoute><OrderPage/></ProtectedRoute>}></Route>
           <Route path="*" element={<h1>Home</h1>}/>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
   );
 }
 
