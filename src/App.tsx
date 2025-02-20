@@ -23,7 +23,7 @@ function App() {
   }, [])
   
   return (
-      <HashRouter>
+      <BrowserRouter>
         <Navbar/>
         <Routes>
           <Route path="/" element={<h1>Home</h1>}/>
@@ -34,7 +34,7 @@ function App() {
           <Route path="/orders" element={<ProtectedRoute><OrderPage/></ProtectedRoute>}></Route>
           <Route path="*" element={<h1>Home</h1>}/>
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
   );
 }
 
