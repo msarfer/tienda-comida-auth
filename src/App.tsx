@@ -23,7 +23,7 @@ function App() {
   }, [])
   
   return (
-      <BrowserRouter>
+      <BrowserRouter basename="/tienda-comida-auth">
         <Navbar/>
         <Routes>
           <Route path="/" element={<h1>Home</h1>}/>
